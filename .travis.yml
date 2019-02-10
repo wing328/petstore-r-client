@@ -4,8 +4,8 @@ cache: packages
 r_packages:
 - jsonlite
 - httr
-install:
-- R -e 'devtools::install_deps(dep = T)'
+#install:
+#- R -e 'devtools::install_deps(dep = T)'
 
 script:
 - R CMD build .
