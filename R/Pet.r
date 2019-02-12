@@ -122,7 +122,7 @@ Pet <- R6::R6Class(
            "name":
              "%s",
            "photoUrls":
-             ["%s"],
+             [%s],
            "tags":
              [%s],
            "status":

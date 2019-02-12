@@ -33,11 +33,11 @@ Category <- R6::R6Class(
     toJSON = function() {
       CategoryObject <- list()
       if (!is.null(self$`id`)) {
-        CategoryObject['id'] <-
+        CategoryObject[['id']] <-
           self$`id`
       }
       if (!is.null(self$`name`)) {
-        CategoryObject['name'] <-
+        CategoryObject[['name']] <-
           self$`name`
       }
 
