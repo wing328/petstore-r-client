@@ -131,19 +131,18 @@ Pet <- R6::R6Class(
         self$`id`,
         jsonlite::toJSON(self$`category`$toJSON(), auto_unbox=TRUE),
         self$`name`,
-        lapply(self$`photoUrls`, function(x) paste(paste0('"', x, '"'), sep=",")),
-        lapply(self$`tags`, function(x) paste(jsonlite::toJSON(x$toJSON(), auto_unbox=TRUE), sep=",")),
+        paste(unlist(lapply(self$`photoUrls`, function(x) paste0('"', x, '"'))), collapse=","),
+        paste(unlist(lapply(self$`tags`, function(x) jsonlite::toJSON(x$toJSON(), auto_unbox=TRUE))), collapse=","),
         self$`status`
       )
     },
     fromJSONString = function(PetJson) {
       PetObject <- jsonlite::fromJSON(PetJson)
       self$`id` <- PetObject$`id`
-      CategoryObject <- Category$new()
-      self$`category` <- CategoryObject$fromJSON(jsonlite::toJSON(PetObject$category, auto_unbox = TRUE))
+      self$`category` <- Category$new()$fromJSON(jsonlite::toJSON(PetObject$category, auto_unbox = TRUE))
       self$`name` <- PetObject$`name`
-      self$`photoUrls` <- PetObject$`photoUrls`
-      self$`tags` <- sapply(PetObject$`tags`, function(x) Tag$new()$fromJSON(jsonlite::toJSON(x, auto_unbox = TRUE)))
+      self$`photoUrls` <- lapply(PetObject$`photoUrls`, function (x) x)
+      self$`tags` <- lapply(PetObject$`tags`, function(x) Tag$new()$fromJSON(jsonlite::toJSON(x, auto_unbox = TRUE)))
       self$`status` <- PetObject$`status`
     }
   )
