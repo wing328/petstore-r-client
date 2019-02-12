@@ -16,7 +16,7 @@ test_that("AddPet", {
 test_that("GetPetById", {
   response <- petApi$GetPetById(petId)
   expect_equal(response$id, petId)
-  expect_equal(response$name, "name_test")
+  expect_equal(response$name, "name_test_failure")
   #expect_equal(response$category, Category$new(450,"test_cat"))
   #expect_equal(response$photoUrls, list("photo_url_test"))
   expect_equal(response$status, "available")
