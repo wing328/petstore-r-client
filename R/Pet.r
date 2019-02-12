@@ -113,29 +113,28 @@ Pet <- R6::R6Class(
       }
     },
     toJSONString = function() {
-       outstring <- sprintf(
+      sprintf(
         '{
            "id":
              %d,
            "category":
-             "%s",
+             %s,
            "name":
              "%s",
            "photoUrls":
              ["%s"],
            "tags":
-             ["%s"],
+             [%s],
            "status":
              "%s"
         }',
         self$`id`,
-        self$`category`$toJSON(),
+        jsonlite::toJSON(self$`category`$toJSON(), auto_unbox=TRUE),
         self$`name`,
-        paste0(self$`photoUrls`, collapse='","'),
-        paste0(sapply(self$`tags`, function(x) x$toJSON()), collapse='","'),
+        lapply(self$`photoUrls`, function(x) paste(paste0('"', x, '"'), sep=",")),
+        lapply(self$`tags`, function(x) paste(jsonlite::toJSON(x$toJSON(), auto_unbox=TRUE), sep=",")),
         self$`status`
       )
-      gsub("[\r\n]| ", "", outstring)
     },
     fromJSONString = function(PetJson) {
       PetObject <- jsonlite::fromJSON(PetJson)
