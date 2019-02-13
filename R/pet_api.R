@@ -42,6 +42,7 @@
 #'
 #' }
 #'
+#' @importFrom jsonlite base64_enc
 #' @export
 PetApi <- R6::R6Class(
   'PetApi',
@@ -188,7 +189,9 @@ PetApi <- R6::R6Class(
       }
 
       # API key authentication
-      headerParams['api_key'] <- self$apiClient$apiKey["api_key"]
+      if ("api_key" %in% names(self$apiClient$apiKey) && nchar(self$apiClient$apiKey["api_key"]) > 0) {
+        headerParams['api_key'] <- self$apiClient$apiKey["api_key"]
+      }
 
       resp <- self$apiClient$callApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "GET",

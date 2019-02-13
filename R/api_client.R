@@ -39,32 +39,32 @@ ApiClient  <- R6::R6Class(
     # Access token
     accessToken = NULL,
     # constructor
-    initialize = function(basePath=NULL, defaultHeaders=NULL, username=NULL, password=NULL, apiKeys=NULL, accessToken=NULL){
-      if (!missing(basePath)) {
+    initialize = function(basePath=NULL, userAgent=NULL, defaultHeaders=NULL, username=NULL, password=NULL, apiKeys=NULL, accessToken=NULL){
+      if (!is.null(basePath)) {
         self$basePath <- basePath
       }
 
-      if (!missing(defaultHeaders)) {
+      if (!is.null(defaultHeaders)) {
         self$defaultHeaders <- defaultHeaders
       }
 
-      if (!missing(username)) {
+      if (!is.null(username)) {
         self$username <- username
       }
 
-      if (!missing(password)) {
+      if (!is.null(password)) {
         self$password <- password
       }
 
-      if (!missing(accessToken)) {
+      if (!is.null(accessToken)) {
         self$accessToken <- accessToken
       }
 
-      if (!missing(apiKeys)) {
+      if (!is.null(apiKeys)) {
         self$apiKeys <- apiKeys
       }
 
-      if (!missing(userAgent)) {
+      if (!is.null(userAgent)) {
         self$`userAgent` <- 'OpenAPI-Generator/0.0.1/r'
       }
     },

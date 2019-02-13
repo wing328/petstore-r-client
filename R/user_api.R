@@ -42,6 +42,7 @@
 #'
 #' }
 #'
+#' @importFrom jsonlite base64_enc
 #' @export
 UserApi <- R6::R6Class(
   'UserApi',

@@ -30,6 +30,7 @@
 #'
 #' }
 #'
+#' @importFrom jsonlite base64_enc
 #' @export
 StoreApi <- R6::R6Class(
   'StoreApi',
@@ -77,7 +78,9 @@ StoreApi <- R6::R6Class(
 
       urlPath <- "/store/inventory"
       # API key authentication
-      headerParams['api_key'] <- self$apiClient$apiKey["api_key"]
+      if ("api_key" %in% names(self$apiClient$apiKey) && nchar(self$apiClient$apiKey["api_key"]) > 0) {
+        headerParams['api_key'] <- self$apiClient$apiKey["api_key"]
+      }
 
       resp <- self$apiClient$callApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "GET",
