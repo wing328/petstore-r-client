@@ -11,7 +11,6 @@
 #'
 #' @field path Stores url path of the request.
 #' @field apiClient Handles the client-server communication.
-#' @field userAgent Set the user agent of the request.
 #'
 #' @importFrom R6 R6Class
 #'
@@ -35,7 +34,6 @@
 StoreApi <- R6::R6Class(
   'StoreApi',
   public = list(
-    userAgent = "OpenAPI-Generator/0.0.1/r",
     apiClient = NULL,
     initialize = function(apiClient){
       if (!missing(apiClient)) {
@@ -55,6 +53,7 @@ StoreApi <- R6::R6Class(
         urlPath <- gsub(paste0("\\{", "orderId", "\\}"), `order.id`, urlPath)
       }
 
+
       resp <- self$apiClient$callApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "DELETE",
                                  queryParams = queryParams,
@@ -65,9 +64,9 @@ StoreApi <- R6::R6Class(
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         # void response, no need to return anything
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
-        Response$new("API client error", resp)
+        ApiResponse$new("API client error", resp)
       } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
-        Response$new("API server error", resp)
+        ApiResponse$new("API server error", resp)
       }
 
     },
@@ -77,6 +76,9 @@ StoreApi <- R6::R6Class(
       headerParams <- character()
 
       urlPath <- "/store/inventory"
+      # API key authentication
+      headerParams['api_key'] <- self$apiClient$apiKey["api_key"]
+
       resp <- self$apiClient$callApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "GET",
                                  queryParams = queryParams,
@@ -87,9 +89,9 @@ StoreApi <- R6::R6Class(
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         integer$new()$fromJSONString(httr::content(resp, "text", encoding = "UTF-8"))
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
-        Response$new("API client error", resp)
+        ApiResponse$new("API client error", resp)
       } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
-        Response$new("API server error", resp)
+        ApiResponse$new("API server error", resp)
       }
 
     },
@@ -103,6 +105,7 @@ StoreApi <- R6::R6Class(
         urlPath <- gsub(paste0("\\{", "orderId", "\\}"), `order.id`, urlPath)
       }
 
+
       resp <- self$apiClient$callApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "GET",
                                  queryParams = queryParams,
@@ -113,9 +116,9 @@ StoreApi <- R6::R6Class(
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         Order$new()$fromJSONString(httr::content(resp, "text", encoding = "UTF-8"))
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
-        Response$new("API client error", resp)
+        ApiResponse$new("API client error", resp)
       } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
-        Response$new("API server error", resp)
+        ApiResponse$new("API server error", resp)
       }
 
     },
@@ -131,6 +134,7 @@ StoreApi <- R6::R6Class(
       }
 
       urlPath <- "/store/order"
+
       resp <- self$apiClient$callApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "POST",
                                  queryParams = queryParams,
@@ -141,9 +145,9 @@ StoreApi <- R6::R6Class(
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         Order$new()$fromJSONString(httr::content(resp, "text", encoding = "UTF-8"))
       } else if (httr::status_code(resp) >= 400 && httr::status_code(resp) <= 499) {
-        Response$new("API client error", resp)
+        ApiResponse$new("API client error", resp)
       } else if (httr::status_code(resp) >= 500 && httr::status_code(resp) <= 599) {
-        Response$new("API server error", resp)
+        ApiResponse$new("API server error", resp)
       }
 
     }
