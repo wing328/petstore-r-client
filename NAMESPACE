@@ -2,8 +2,8 @@
 # Do not edit by hand
 
 # Models
-export(ApiResponse)
 export(Category)
+export(ModelApiResponse)
 export(Order)
 export(Pet)
 export(Tag)
