@@ -2,10 +2,10 @@ context("basic functionality")
 petApi <- PetApi$new()
 petId <- 123321
 test_that("AddPet", {
-  pet <- Pet$new(petId, Category$new(id=450, name="test_cat"), "name_test",
-                list("photo_test", "second test"),
-                list(Tag$new(id=123, name="tag_test"), Tag$new(id=456, name="unknown")), 
-                "available")
+  pet <- Pet$new("name_test", list("photo_test", "second test"),
+                 petId, Category$new(id=450, name="test_cat"),
+                 list(Tag$new(id=123, name="tag_test"), Tag$new(id=456, name="unknown")), 
+                 "available")
   #pet <- Pet$new("name_test", 
   #               list("photo_test", "second test"),
   #               category=Category$new(id=450, name="test_cat"),
@@ -18,10 +18,10 @@ test_that("AddPet", {
 })
 
 test_that("Test Pet", {
-  pet <- Pet$new(petId, Category$new(id=450, name="test_cat"), "name_test",
-                list("photo_test", "second test"),
-                list(Tag$new(id=123, name="tag_test"), Tag$new(id=456, name="unknown")), 
-                "available")
+  pet <- Pet$new("name_test", list("photo_test", "second test"),
+                 petId, Category$new(id=450, name="test_cat"),
+                 list(Tag$new(id=123, name="tag_test"), Tag$new(id=456, name="unknown")), 
+                 "available")
 
   pet2 <- Pet$new()
   #pet2$fromJSON(jsonlite::toJSON(pet$toJSON(), auto_unbox=TRUE))
