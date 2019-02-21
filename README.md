@@ -24,9 +24,11 @@ install.packages("caTools")
 ### Build the package
 
 ```sh
-- R CMD build .
-- R CMD check petstore_0.0.1.tar.gz
-- R CMD INSTALL petstore_0.0.1.tar.gz
+git clone https://github.com/wing328/petstore-r-client
+cd petstore-r-client
+R CMD build .
+R CMD check petstore_0.0.1.tar.gz
+R CMD INSTALL petstore_0.0.1.tar.gz
 ```
 
 ### Install the package
@@ -35,10 +37,17 @@ install.packages("caTools")
 install.packages("petstore")
 ```
 
+To install directly from Github, use `devtools`:
+```R
+install.packages("devtools")
+library(devtools)
+install_github("wing328/petstore-r-client")
+```
+
 ### Usage
 
 ```R
-libary(petstore)
+library(petstore)
 ```
 
 ## Documentation for API Endpoints
@@ -84,7 +93,9 @@ Class | Method | HTTP request | Description
 
 ### api_key
 
-- **Type**: HTTP basic authentication
+- **Type**: API key
+- **API key parameter name**: api_key
+- **Location**: HTTP header
 
 ### petstore_auth
 

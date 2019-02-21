@@ -63,9 +63,8 @@ library(petstore)
 
 #Returns pet inventories by status
 api.instance <- StoreApi$new()
-# Configure HTTP basic authorization: api_key
-api.instance$apiClient$username <- 'TODO_YOUR_USERNAME';
-api.instance$apiClient$password <- 'TODO_YOUR_PASSWORD';
+# Configure API key authorization: api_key
+api.instance$apiClient$apiKeys['api_key'] <- 'TODO_YOUR_API_KEY';
 result <- api.instance$GetInventory()
 dput(result)
 ```
