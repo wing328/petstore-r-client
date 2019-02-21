@@ -84,9 +84,7 @@ Class | Method | HTTP request | Description
 
 ### api_key
 
-- **Type**: API key
-- **API key parameter name**: api_key
-- **Location**: HTTP header
+- **Type**: HTTP basic authentication
 
 ### petstore_auth
 

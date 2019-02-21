@@ -202,10 +202,8 @@ PetApi <- R6::R6Class(
         urlPath <- gsub(paste0("\\{", "petId", "\\}"), `pet.id`, urlPath)
       }
 
-      # API key authentication
-      if ("api_key" %in% names(self$apiClient$apiKeys) && nchar(self$apiClient$apiKeys["api_key"]) > 0) {
-        headerParams['api_key'] <- paste(unlist(self$apiClient$apiKeys["api_key"]), collapse='')
-      }
+      # HTTP basic auth
+      headerParams['Authorization'] <- paste("Basic", caTools::base64encode(paste(self$apiClient$username, self$apiClient$password, sep=":")), sep=" ")
 
       resp <- self$apiClient$CallApi(url = paste0(self$apiClient$basePath, urlPath),
                                  method = "GET",
