@@ -13,5 +13,8 @@ script:
 - R CMD build .
 - R CMD check *tar.gz
 - R CMD INSTALL *tar.gz
+- curl -Os https://uploader.codecov.io/latest/linux/codecov
+- chmod +x codecov
+- ./codecov
 after_failure:
 - cat ${TRAVIS_BUILD_DIR}/namsor.Rcheck/tests/testthat.Rout.fail
